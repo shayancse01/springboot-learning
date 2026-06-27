@@ -10,7 +10,6 @@ public class Module2restApiApplication {
 
 		SpringApplication.run(Module2restApiApplication.class, args);
 
-		System.out.println("Hello..");
 	}
 
 }
