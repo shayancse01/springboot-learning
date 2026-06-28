@@ -1,11 +1,15 @@
 package com.codingshuttle.shayan.module2restApi.entities;
 
 import jakarta.persistence.*;
-
+import lombok.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "employees")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
