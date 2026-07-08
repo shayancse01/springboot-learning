@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import java.time.LocalDate;
 
@@ -22,6 +23,8 @@ public class EmployeeEntity {
     private String email;
     private int age;
     private LocalDate dateOfJoining;
+    private double salary;
+    private String role;
 
     @JsonIgnore
     private boolean isActive;

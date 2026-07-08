@@ -3,6 +3,7 @@ package com.codingshuttle.shayan.module2restApi.controllers;
 import com.codingshuttle.shayan.module2restApi.dto.EmployeeDTO;
 import com.codingshuttle.shayan.module2restApi.entities.EmployeeEntity;
 import com.codingshuttle.shayan.module2restApi.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +37,13 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody EmployeeDTO inputEmployee) {
+    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody @Valid EmployeeDTO inputEmployee) {
         EmployeeDTO savedEmployee = employeeService.createNewEmployee(inputEmployee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{employeeId}")
-    public ResponseEntity<EmployeeDTO> updateEmployeeById(@RequestBody EmployeeDTO employeeDTO, @PathVariable Long employeeId) {
+    public ResponseEntity<EmployeeDTO> updateEmployeeById(@RequestBody @Valid EmployeeDTO employeeDTO, @PathVariable Long employeeId) {
         return ResponseEntity.ok(employeeService.updateEmployeeById(employeeId, employeeDTO));
     }
 

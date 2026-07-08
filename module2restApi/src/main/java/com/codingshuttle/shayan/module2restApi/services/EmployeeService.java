@@ -67,6 +67,7 @@ public class EmployeeService {
         return true;
     }
 
+    //for Patch mapping
     public EmployeeDTO updatePartialEmployeeById(Long employeeId, Map<String, Object> updates) {
         boolean exists = isExistsByEmployeeId(employeeId);
         if(!exists) return null;
