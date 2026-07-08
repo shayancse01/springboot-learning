@@ -1,5 +1,9 @@
 package com.codingshuttle.shayan.module2restApi.entities;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
@@ -18,5 +22,17 @@ public class EmployeeEntity {
     private String email;
     private int age;
     private LocalDate dateOfJoining;
+
+    @JsonIgnore
     private boolean isActive;
+
+    @JsonGetter("isActive")
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    @JsonSetter("isActive")
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 }

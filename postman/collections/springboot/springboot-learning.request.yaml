@@ -1,0 +1,5 @@
+$kind: http-request
+url: ""
+method: GET
+examples: .resources/springboot-learning.resources/examples
+order: 1782727944290
