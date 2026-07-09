@@ -38,7 +38,7 @@ public class EmployeeDTO {  //basically it is the POJO class
     private String role; //it can take either ADMIN or USER, nothing else
 
     @Positive(message = "salary should be positive")
-    @Digits(integer = 6, fraction = 2)
+    //@Digits(integer = 6, fraction = 2)
     @NotNull
     private Double salary;
 
