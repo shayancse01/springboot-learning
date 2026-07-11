@@ -7,7 +7,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class ApiResponce<T> {
+public class ApiResponse<T> {
 
     @JsonFormat(pattern = "hh:mm:ss yyyy-MM-dd")
     private LocalDateTime timeStamp;
@@ -16,16 +16,16 @@ public class ApiResponce<T> {
     private T data;
     private ApiError error;
 
-    public ApiResponce() {
+    public ApiResponse() {
         this.timeStamp = LocalDateTime.now();
     }
 
-    public ApiResponce(T data) {
+    public ApiResponse(T data) {
         this();
         this.data = data;
     }
 
-    public ApiResponce(ApiError error) {
+    public ApiResponse(ApiError error) {
         this();
         this.error = error;
     }

@@ -25,27 +25,27 @@ public class GlobalExceptionHandler {
 //    }
 
 
-    //Now instead of returning ApiError we will return ApiResponce and inside the ApiResponce there is ApiError
+    //Now instead of returning ApiError we will return ApiResponse and inside the ApiResponse there is ApiError
     @ExceptionHandler(ResourceNotFoundException.class)  //Handles the Resource not found exception
-    public ResponseEntity<ApiResponce<?>> handleResourceNotFound(ResourceNotFoundException exception) {
+    public ResponseEntity<ApiResponse<?>> handleResourceNotFound(ResourceNotFoundException exception) {
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.NOT_FOUND)
                 .message(exception.getMessage())
                 .build();
-        return buildErrorResponceEntity(apiError);
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(Exception.class) //handles all type of exception as it is the parent class
-    public ResponseEntity<ApiResponce<?>> handleInternalServerError(Exception exception) {
+    public ResponseEntity<ApiResponse<?>> handleInternalServerError(Exception exception) {
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .message(exception.getMessage())
                 .build();
-        return buildErrorResponceEntity(apiError);
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponce<?>> handleInputValidationErrors(MethodArgumentNotValidException exception) {
+    public ResponseEntity<ApiResponse<?>> handleInputValidationErrors(MethodArgumentNotValidException exception) {
         List<String> errors = exception.getBindingResult()
                 .getAllErrors()
                 .stream()
@@ -57,10 +57,10 @@ public class GlobalExceptionHandler {
                 .message("Input validations failed")
                 .subErrors(errors)
                 .build();
-        return buildErrorResponceEntity(apiError);
+        return buildErrorResponseEntity(apiError);
     }
 
-    private ResponseEntity<ApiResponce<?>> buildErrorResponceEntity(ApiError apiError) {
-        return new ResponseEntity<>(new ApiResponce<>(apiError), apiError.getStatus());
+    private ResponseEntity<ApiResponse<?>> buildErrorResponseEntity(ApiError apiError) {
+        return new ResponseEntity<>(new ApiResponse<>(apiError), apiError.getStatus());
     }
 }

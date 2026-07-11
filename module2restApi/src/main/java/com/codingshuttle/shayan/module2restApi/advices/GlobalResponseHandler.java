@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @RestControllerAdvice
-public class GlobalResponceHandler implements ResponseBodyAdvice<Object> {
+public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
     //The supports() method is actually a filter.
     // It tells Spring whether your beforeBodyWrite() method should run for a particular controller response or not.
@@ -21,15 +21,15 @@ public class GlobalResponceHandler implements ResponseBodyAdvice<Object> {
         return true;
     }
 
-    //Here we can tranform the object body to anything we want
+    //Here we can transform the object body to anything we want
     //beforeBodyWrite() is used to modify or wrap every API response just before it is sent to the client.
     @Override
     public @Nullable Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        if (body instanceof ApiResponce<?>) { //If responce is already in ApiResponce / Already wrapped?
+        if (body instanceof ApiResponse<?>) { //If response is already in ApiResponse / Already wrapped?
             return body; //send it without any changes / Return as it is
         }
-        return new ApiResponce<>(body); //Put the responce inside ApiResponce / wrap the responce
+        return new ApiResponse<>(body); //Put the response inside ApiResponse / wrap the response
 
-        //Now it will return each and every responce encapsulated by ApiResponce only
+        //Now it will return each and every response encapsulated by ApiResponse only
     }
 }
