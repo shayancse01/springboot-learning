@@ -2,6 +2,8 @@ package com.codingshuttle.jpa.Tutorial.jpaTuts.repositories;
 
 
 import com.codingshuttle.jpa.Tutorial.jpaTuts.entities.ProductEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,6 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
-
-    List<ProductEntity> findByTitle(String title);
 
     List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
 
@@ -31,5 +31,11 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     //@Query("select e from ProductEntity e where e.title=?1 and e.price=?2") //This is our JPQL, and the "title" will be converted to title_x by hibernate
     @Query("select e.title from ProductEntity e where e.title=:title and e.price=:price") //Or we can write our JPQL like this
     Optional<ProductEntity> findByTitleAndPrice(String title, BigDecimal price);
+
+
+    // Sorting and Pagable
+    List<ProductEntity> findBy(Sort sort);
+
+    List<ProductEntity> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 
 }
