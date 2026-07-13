@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
         name = "product_table",
         uniqueConstraints = {
                 // @UniqueConstraint(name = "sku_unique", columnNames = {"sku"}),
-                @UniqueConstraint(name = "title_price_unique", columnNames = {"tittle_x", "price"})
+                @UniqueConstraint(name = "title_price_unique", columnNames = {"title_x", "price"})
                 //now price and tittle combined is unique
         },
         indexes = {  //An index is a special data structure that helps the database find rows much faster,
@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
                 @Index(name = "sku_index", columnList = "sku")
         }
 )
-public class Product {
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +39,8 @@ public class Product {
     //I can not add null for this field only inside database
     //and also the length cannot be more than 20
 
-    @Column(name = "tittle_x") //this annotation is used to name the table inside the database
-    private String tittle;
+    @Column(name = "title_x") //this annotation is used to name the table inside the database
+    private String title;
 
     private BigDecimal price;
 
