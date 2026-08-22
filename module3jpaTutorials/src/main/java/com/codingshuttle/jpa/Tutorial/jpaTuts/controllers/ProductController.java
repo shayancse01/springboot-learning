@@ -53,7 +53,7 @@ public class ProductController {
                 pageNumber,
                 PAGE_SIZE,
                 Sort.by(sortBy));  //for sorting
-        return productRepository.findAll(pageable).getContent();
+        return productRepository.findAll(pageable).getContent(); //here we are using getter, .getContent() to only get the content of the items, not the whole information
 */
         return productRepository.findByTitleContainingIgnoreCase(
                 title,
