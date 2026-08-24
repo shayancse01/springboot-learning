@@ -2,7 +2,9 @@ package com.codingshuttle.Tutorials.HospitalManagementSystem;
 
 import com.codingshuttle.Tutorials.HospitalManagementSystem.dto.BloodGroupStats;
 import com.codingshuttle.Tutorials.HospitalManagementSystem.dto.CPatientInfo;
+import com.codingshuttle.Tutorials.HospitalManagementSystem.entity.Patient;
 import com.codingshuttle.Tutorials.HospitalManagementSystem.repository.PatientRepository;
+import com.codingshuttle.Tutorials.HospitalManagementSystem.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +16,9 @@ public class PatientServiceTest {
 
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private PatientService patientService;
 
     @Test
     void testPatient() {
@@ -30,7 +35,12 @@ public class PatientServiceTest {
 //            System.out.println("----------------------------------------");
 //        }
 
-        int rowsAffected = patientRepository.updatePatientNameWithId("Shayan Chakraborty",1L);
-        System.out.println(rowsAffected);
+//        int rowsAffected = patientRepository.updatePatientNameWithId("Shayan Chakraborty",1L);
+//        System.out.println(rowsAffected);
+//
+//        Patient p = new Patient();
+//        patientRepository.save(p);
+
+        patientService.testPatientTransaction();
     }
 }
