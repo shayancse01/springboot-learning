@@ -1,10 +1,8 @@
 package com.codingshuttle.Tutorials.HospitalManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString
 public class Appoinment {
 
     @Id
@@ -27,10 +27,14 @@ public class Appoinment {
 
     @ManyToOne // Many Appoinment to one patient
     @JoinColumn(nullable = false) //This means patient is required whenever we create an appoinment in the Data Base
+    @ToString.Exclude
+    @JsonIgnore
     private Patient patient; //Owning side
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @ToString.Exclude
+    @JsonIgnore
     private Doctor doctor; //Owning side
 
 }

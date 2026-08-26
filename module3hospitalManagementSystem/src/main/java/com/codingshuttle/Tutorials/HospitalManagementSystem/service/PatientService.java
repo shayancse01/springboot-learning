@@ -65,4 +65,15 @@ public class PatientService {
         // During transaction commit/flush, Hibernate's dirty checking detects the change
         // and automatically executes an UPDATE query and update inside the database. No save() is required.
     }
+
+    //Now we will delete a Patient as well as the insurance associated with it
+    @Transactional
+    public void deletePatient(Long patientId) {
+
+        patientRepository.findById(patientId).orElseThrow();
+        patientRepository.deleteById(patientId);
+
+        //The insurance will also get deleted as we have set cascade type All
+        //So we are deleting the parent, The child will also be deleted
+    }
 }

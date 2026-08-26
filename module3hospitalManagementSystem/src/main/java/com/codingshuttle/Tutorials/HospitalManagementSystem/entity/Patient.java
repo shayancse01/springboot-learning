@@ -37,12 +37,15 @@ public class Patient {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @OneToOne //One To One annotation automatically make Unique = true
+    //We have to define cascading here as Patient(Here Patient is the parent and insurance is the child) is the owner of this relationship
+    @OneToOne(cascade = CascadeType.ALL) //One To One annotation automatically make Unique = true
     @JoinColumn(name = "patient_insurance", unique = true) //Only use join column in the owning side, Now the name of this column will be patient_insurance
     private Insurance insurance; //Owning side, Patient will now have the insurance column.
 
+
+
     //As One patient will have multiple appoinments
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL) //As we want when the patient is deleted the appoinment should also get deleted, but the appoinment get deleted the patient will be there
     private Set<Appoinment> appoinments = new HashSet<>(); //Inverse side
     //In set the Data is present in a random order, so we can also create a List instead
 
