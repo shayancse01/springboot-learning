@@ -35,7 +35,9 @@ public class InsuranceTest {
         var updatedInsurance = insuranceService.assignInsuranceToPatient(insurance, 1L);
         System.out.println(updatedInsurance);
 
-        patientService.deletePatient(1L);
+        //patientService.deletePatient(1L);
+        var patient = insuranceService.removeInsuranceOfAPatient(1L);
+        System.out.println(patient);
     }
 
     @Test
@@ -48,6 +50,6 @@ public class InsuranceTest {
         var updatedAppoinment = appoinmentService.createANewAppoinment(appoinment, 1L, 2L);
         System.out.println(updatedAppoinment);
 
-        patientService.deletePatient(1L); //If we are deleting the patient, Does it also delete the appoinment as well
+        patientService.deletePatient(1L); //If we are deleting the patient, Does it also delete the appoinment as well?
     }
 }

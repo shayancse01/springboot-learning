@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class InsuranceService {
@@ -28,6 +29,29 @@ public class InsuranceService {
         insurance.setPatient(patient); //Optional, just to maintain the By directional consistency
 
         return insurance;
+    }
+
+    //It will remove the insurance associated with a patient
+    @Transactional
+    public Patient removeInsuranceOfAPatient(Long patientId) {
+
+        Patient patient = patientRepository.findById(patientId).orElseThrow();
+
+        patient.setInsurance(null);
+
+        return patient;
+    }
+
+    @Transactional
+    public Insurance updateInsuranceOfAPatient(Insurance insurance, Long patientId) {
+
+        Patient patient = patientRepository.findById(patientId).orElseThrow();
+
+        patient.setInsurance(insurance);
+        insurance.setPatient(patient);
+
+        return insurance;
+        //It will also delete the previous insurance and assign the new insurance to the patient
     }
 
 }
