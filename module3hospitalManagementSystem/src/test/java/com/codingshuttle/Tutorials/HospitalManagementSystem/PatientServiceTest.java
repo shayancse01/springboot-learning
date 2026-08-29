@@ -47,7 +47,7 @@ public class PatientServiceTest {
         List<Patient> patients = patientRepository.getAllPatientsByAppoinments();
 
         for (Patient p: patients) {
-            System.out.println(p);
+            System.out.println();
         }
     }
 }
