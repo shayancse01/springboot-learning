@@ -44,7 +44,6 @@ public class EmployeeDTO {  //basically it is the POJO class
 
     private LocalDate dateOfJoining;
 
-    @JsonIgnore
     @AssertTrue(message = "isActive filed should be true")
     private boolean isActive;
 

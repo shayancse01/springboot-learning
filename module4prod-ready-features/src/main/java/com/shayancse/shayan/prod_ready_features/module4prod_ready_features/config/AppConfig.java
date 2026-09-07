@@ -18,9 +18,9 @@ public class AppConfig {
 
     @Bean
     AuditorAware<String> getAuditorAwareImpl() {
+
         return new AuditorAwareImpl();
     }
-
 
 
 }
