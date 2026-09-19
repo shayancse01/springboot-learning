@@ -664,3 +664,5 @@ java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdvi
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74)
 	at java.base/java.lang.Thread.run(Thread.java:1516)
 2026-09-10 12:00:06 WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-10 12:00:15 WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-10 12:03:09 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.shayancse.shayan.prod_ready_features.module4prod_ready_features.exceptions.ResourceNotFoundException: Post not found with this Id: 1]
