@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Module5SecurityApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(Module5SecurityApplication.class, args);
 	}
 
