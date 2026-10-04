@@ -2,8 +2,6 @@ package com.shayancse.SecurityApp.module5SecurityApplication.services;
 
 import com.shayancse.SecurityApp.module5SecurityApplication.dto.LoginDTO;
 import com.shayancse.SecurityApp.module5SecurityApplication.entities.User;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

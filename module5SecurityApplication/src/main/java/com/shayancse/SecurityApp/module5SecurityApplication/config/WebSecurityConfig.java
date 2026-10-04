@@ -1,5 +1,7 @@
 package com.shayancse.SecurityApp.module5SecurityApplication.config;
 
+import com.shayancse.SecurityApp.module5SecurityApplication.filters.JwtAuthFilter;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Bag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +19,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity //By this we are telling spring-boot that we are configuring spring security filter chain.
+@RequiredArgsConstructor
 public class WebSecurityConfig {
+
+    private final JwtAuthFilter jwtAuthFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -29,7 +35,7 @@ public class WebSecurityConfig {
                 //For authorization of requests
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/posts", "/error", "/auth/**").permitAll() //Means these routes are public for anyone
-                        .requestMatchers("/posts/**").hasRole("ADMIN")
+                        //.requestMatchers("/posts/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
 
                 //For the CSRF Token
@@ -37,7 +43,10 @@ public class WebSecurityConfig {
 
                 //For the session management
                 .sessionManagement(sessionConfig -> sessionConfig
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                //Add our custom jwtAuthFilter just before the UsernamePasswordAuthenticationFilter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
                 //.formLogin(Customizer.withDefaults());
 
@@ -66,10 +75,4 @@ public class WebSecurityConfig {
 //
 //        return new InMemoryUserDetailsManager(normalUser, adminUser);
 //    }
-
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

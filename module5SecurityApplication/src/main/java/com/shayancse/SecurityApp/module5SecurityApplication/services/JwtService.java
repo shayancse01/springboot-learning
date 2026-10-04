@@ -29,7 +29,7 @@ public class JwtService {
                 .claim("email", user.getEmail())
                 .claim("roles", Set.of("ADMIN", "USER"))
                 .issuedAt(new Date()) //Current time
-                .expiration(new Date(System.currentTimeMillis() + 1000*60)) //Expiration time -> after 1 minute
+                .expiration(new Date(System.currentTimeMillis() + 1000*60*15)) //Expiration time -> after 1 minute
                 //Upto this, these are the payloads subject, claims, issuedAt, expiration
                 .signWith(getSecretKey())
                 .compact();
@@ -37,13 +37,14 @@ public class JwtService {
 
     //Verification of the Jwt Token
     public Long getUserIdFromToken(String token) {
-        Claims claims = Jwts.parser()
+        Claims claims = Jwts.parser()//Just making the parser available here
                 .verifyWith(getSecretKey())
                 .build()
-                .parseSignedClaims(token)
+                //Upto this we are building the parser -> like how to parse the token
+                .parseSignedClaims(token) //parsing is done here
                 .getPayload();
 
-        return Long.valueOf(claims.getSubject());
+        return Long.valueOf(claims.getSubject()); //we are returning the subject means the user id
 
     }
 

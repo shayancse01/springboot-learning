@@ -2,15 +2,19 @@ package com.shayancse.SecurityApp.module5SecurityApplication.services;
 
 import com.shayancse.SecurityApp.module5SecurityApplication.dto.PostDTO;
 import com.shayancse.SecurityApp.module5SecurityApplication.entities.PostEntity;
+import com.shayancse.SecurityApp.module5SecurityApplication.entities.User;
 import com.shayancse.SecurityApp.module5SecurityApplication.exceptions.ResourceNotFoundException;
 import com.shayancse.SecurityApp.module5SecurityApplication.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
@@ -40,6 +44,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO getPostById(Long postId) {
+
+        //We can do our authentication here as well
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //getPrinciple will contain the user details
+        log.info("user {}", user); //for printing the user log in the console
+
         PostEntity postEntity = postRepository
                 .findById(postId)
                 .orElseThrow(() ->
