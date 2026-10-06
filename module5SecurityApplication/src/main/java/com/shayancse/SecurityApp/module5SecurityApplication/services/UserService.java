@@ -1,6 +1,5 @@
 package com.shayancse.SecurityApp.module5SecurityApplication.services;
 
-import com.shayancse.SecurityApp.module5SecurityApplication.dto.LoginDTO;
 import com.shayancse.SecurityApp.module5SecurityApplication.dto.SignUpDTO;
 import com.shayancse.SecurityApp.module5SecurityApplication.dto.UserDTO;
 import com.shayancse.SecurityApp.module5SecurityApplication.entities.User;
@@ -8,10 +7,7 @@ import com.shayancse.SecurityApp.module5SecurityApplication.exceptions.ResourceN
 import com.shayancse.SecurityApp.module5SecurityApplication.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,7 +27,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User with email " + username + " not found"));
+                .orElseThrow(() -> new BadCredentialsException("User with email " + username + " not found"));
     }
 
 
