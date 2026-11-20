@@ -26,7 +26,7 @@ public class JwtService {
         return Jwts.builder()
                 .subject(user.getId().toString())
                 .claim("email", user.getEmail())
-                .claim("roles", Set.of("ADMIN", "USER"))
+                .claim("roles", user.getRoles().toString()) //Now we can get the roles from the user itself
                 .issuedAt(new Date()) //Current time
                 .expiration(new Date(System.currentTimeMillis() + 1000*60*10)) //Expiration time -> after 1 minute
                 //Upto this, these are the payloads subject, claims, issuedAt, expiration
